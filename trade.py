@@ -1,29 +1,25 @@
 # Live trade code  
-import sys
-import os 
 import datetime, time 
 import talib as ta 
-import numpy as np
 import pandas as pd 
+import yfinance as yf 
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from logger import CustomeLogger
+from logger.CustomLogger import CustomLogger
 
 
 current_time = datetime.datetime.now().time()
-start_time = datetime.datetie.time(9,30)
-end_time = datetime.datetime.time(15, 30)
+start_time = datetime.time(9, 30)
+end_time = datetime.time(15, 30)
 upper_band, lower_band = 70, 30
 ticker = "RELIANCE.NS"
 
 
-
-while true:
-    logger = CustomeLogger(__main__).get_logger()
+while True:
+    logger = CustomLogger(__name__).get_logger()
     current_time = datetime.datetime.now().time()
     if start_time <= current_time < end_time:
         reliance = yf.download(ticker , interval="1m", period="1D")
-        data = pd.Dataframe({
+        data = pd.DataFrame({
                 "Date": reliance.index,
                 "Open": reliance["Open"].values.flatten(),
                 "High": reliance["High"].values.flatten(),
@@ -38,7 +34,7 @@ while true:
 
         last_action = None
 
-        for index, row in data.itterrow():
+        for index, row in data.iterrows():
             if row["RSI"] < lower_band and last_action != "Buy":
                 data.at[index, "Signal"] = "Buy"
                 last_action = "Buy"
