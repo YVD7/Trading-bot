@@ -1,0 +1,6 @@
+# indicators
+
+1. RSI - implimented
+2. Bolinger Band + RSI ( combo ) - Not tried -> Mean Reversion
+3. MACD - Not tried yet 
+
