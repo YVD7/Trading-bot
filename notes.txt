@@ -4,3 +4,5 @@
 2. Bolinger Band + RSI ( combo ) - Not tried -> Mean Reversion
 3. MACD - Not tried yet 
 
+
+RSI, Bolinger band , MACD : https://medium.com/@armand_aguilar/candlestick-rsi-bollinger-bands-and-macd-with-python-ba7ddaef0525
