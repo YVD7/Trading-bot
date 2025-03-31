@@ -1,0 +1,33 @@
+name: Trading Bot Workflow
+
+on:
+    schedule:
+        - cron: '0 * * * *' # Runs every hour
+    workflow_dispatch: # Allows manual trigger of the workflow
+
+jobs:
+    run-trading-bot:
+        runs-on: ubuntu-latest
+
+        steps:
+          - name: Checkout repository
+            uses: actions/checkout@v3
+
+          - name: Set up Miniconda
+            uses: conda-incubator/setup-miniconda@v2
+            with:
+                python-version: 3.10
+                auto-activate-base: false
+                auto-update-conda: true
+
+          - name: Create environment from requirements.txt
+            run: |
+                conda create --name trading-bot-env --file requirements.txt --yes
+
+          - name: Install TA-Lib
+            run: |
+                conda install --name trading-bot-env -c conda-forge ta-lib --yes
+
+          - name: Run trade.py
+            run: |
+                conda run --name trading-bot-env python trade.py
